@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from async_google_trans_new import AsyncTranslator, constant
+import ollama_translator
 from http.client import HTTPSConnection as hc
 from twitchio.ext import commands
 from emoji import distinct_emoji_list
@@ -127,7 +128,10 @@ if hasattr(config, 'GoogleTranslate_suffix'):
 else:
     url_suffix = 'co.jp'
 
-translator = AsyncTranslator(url_suffix=url_suffix)
+if config.Translator == 'ollama':
+    translator = ollama_translator.AsyncTranslator(model=config.Ollama_Model, base_url=config.Ollama_URL)
+else:
+    translator = AsyncTranslator(url_suffix=url_suffix)
 tts = tts.TTS(config)
 sound = sound.Sound(config)
 
@@ -464,7 +468,7 @@ class Bot(commands.Bot):
                     if config.Debug: print(e)
 
             # NOT use deepl ----------
-            elif config.Translator == 'google':
+            elif config.Translator == 'google' or config.Translator == 'ollama':
                 # use google_trans_new ---
                 if not config.GAS_URL:
                     try:

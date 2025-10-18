@@ -35,8 +35,10 @@ TTS_MessageForOmitting  = ""
 # for example, ['ja'] means Japanese only, ['ko','en'] means Korean and English are TTS!
 ReadOnlyTheseLang       = []
 
-# Select the translate engine ('deepl' or 'google')
-Translator              = 'google'
+# Select the translate engine ('deepl' or 'google' or 'ollama')
+Translator              = 'ollama'
+Ollama_Model            = 'gemma3:12b'
+Ollama_URL              = 'http://localhost:11434'
 
 # Use Google Apps Script for tlanslating
 # e.g.) GAS_URL         = 'https://script.google.com/macros/s/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/exec'
