@@ -15,7 +15,7 @@ class AsyncTranslator:
 
     async def translate(self, text: str, lang_tgt: str = "auto", lang_src: str = "auto") -> str:
         system_prompt = (
-            "You are a professional translator. Your task is to translate text between languages."
+            "You are a professional translator. Your task is to translate text between languages. Never include any additional information, such as pronunciation or transliteration."
         )
 
         if lang_src == "auto":
