@@ -259,8 +259,9 @@ class Bot(commands.Bot):
     async def event_channel_joined(self, channel):
         'Called once when the bot goes online.'
         print(f"{self.nick} is online!")
-        await channel.send(f"/color {config.Trans_TextColor}")
-        await channel.send(f"/me {wakeup_message}")
+        if hasattr(config, "ShowWakeupMessage") and config.ShowWakeupMessage:
+            await channel.send(f"/color {config.Trans_TextColor}")
+            await channel.send(f"/me {wakeup_message}")
 
     # メッセージを受信したら ####################
     async def event_message(self, msg):
