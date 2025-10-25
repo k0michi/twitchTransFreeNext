@@ -1,6 +1,7 @@
 import playsound as _playsound
 from pathlib import Path
 
+# Workaround for the issue that playsound 1.3.0 does not handle relative paths on Windows
 def playsound(file_path, block=True):
     # Convert to absolute path if it's a relative path
     abs_path = str(Path(file_path).resolve())
