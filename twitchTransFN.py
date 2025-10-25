@@ -378,7 +378,7 @@ class Bot(commands.Bot):
         lang_detect = ''
 
         # use google_trans_new ---
-        if not config.GAS_URL or config.Translator == 'deepl':
+        if not config.GAS_URL or config.Translator == 'deepl' or config.Translator == 'ollama':
             try:
                 detected = await translator.detect(in_text)
                 lang_detect = detected[0]
