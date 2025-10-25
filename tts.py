@@ -9,6 +9,7 @@ import queue
 import threading
 import platform
 import sys
+import subprocess
 
 # Check if we're on macOS
 is_macos = platform.system() == 'Darwin'
@@ -104,6 +105,33 @@ class TTS:
                 if self.config.Debug: print(e.args)
         return play
 
+    def Voicepeak(self, config):
+        path = config["Path"]
+        narrator = config["Narrator"]
+        
+        def play(text, _):
+            try:
+                tts_file = './tmp/cnt_{}.wav'.format(datetime.now().microsecond)
+                if self.config.Debug: print('Voicepeak file: {}'.format(tts_file))
+                subprocess.run([path, '-n', narrator, '-o', tts_file, '-s', text])
+
+                # Play the sound
+                if playsound_available:
+                    playsound(tts_file, True)
+                else:
+                    if is_macos:
+                        os.system(f"afplay {tts_file}")
+                    else:
+                        print('Voicepeak error: No sound playback method available')
+                        if 'import_error' in globals():
+                            print(import_error)
+                
+                os.remove(tts_file)
+            except Exception as e:
+                print('Voicepeak error: TTS sound is not generated...')
+                if self.config.Debug: print(e)
+    
+        return play
 
     # gTTSを利用して
     # 音声合成 ＆ ファイル保存 ＆ ファイル削除
@@ -138,6 +166,8 @@ class TTS:
         kind = self.config.TTS_Kind.strip().upper()
         if kind == "CeVIO".upper():
             return self.CeVIO(self.config.CeVIO_Cast)
+        elif kind == "Voicepeak".upper():
+            return self.Voicepeak(self.config.Voicepeak)
         else:
             return self.gTTS_play
 

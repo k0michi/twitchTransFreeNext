@@ -26,8 +26,12 @@ Delete_Words            = ['saatanNooBow', 'BikuBikuTest']
 # TTS_In:User Input Text, TTS_Out:Bot Output Text
 TTS_In                  = True
 TTS_Out                 = True
-TTS_Kind                = "gTTS" # You can choice "CeVIO" if you want to use CeVIO as TTS.
+TTS_Kind                = "gTTS" # "gTTS" or "CeVIO" or "Voicepeak"
 # CeVIO_Cast            = "さとうささら" # When you are using CeVIO, you must set voice cast name.
+Voicepeak = {
+  "Narrator": "花隈千冬",
+  "Path": "C:\\Program Files\\Voicepeak\\voicepeak.exe"
+}
 TTS_TextMaxLength       = 30
 TTS_MessageForOmitting  = ""
 
