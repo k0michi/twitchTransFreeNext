@@ -13,7 +13,7 @@ is_macos = platform.system() == 'Darwin'
 
 # Import playsound with appropriate handling for macOS
 try:
-    from playsound import playsound
+    from playsound_compat import playsound
     playsound_available = True
 except ImportError as e:
     playsound_available = False
